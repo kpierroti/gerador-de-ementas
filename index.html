@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PUD — Cadastro de Cursos (gera data.js)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grid"></div>
+
+  <header>
+    <h1>PUD — Tela de cadastro de cursos (gera <code>data.js</code>)</h1>
+    <div class="muted">
+      Cadastre cursos com todos os campos obrigatórios e exporte no formato do seu <code>window.PUD_DATA</code>.
+      Se você salvar um curso com o mesmo título, ele faz merge e só sobrescreve campos preenchidos.
+    </div>
+  </header>
+
+  <main>
+    <!-- FORM -->
+    <section class="card">
+      <h2>Cadastro / Edição de Curso</h2>
+
+      <div class="row3">
+        <div>
+          <label>Público (categoria)</label>
+          <select id="audience">
+            <option value="criancas">Crianças</option>
+            <option value="jovens_adultos">Jovens e Adultos</option>
+            <option value="seniors">Seniors</option>
+            <option value="nivelamento">Nivelamento</option>
+          </select>
+          <div class="muted">Obs.: “Nivelamento” aqui é uma categoria de público.</div>
+        </div>
+
+        <div>
+          <label>Área</label>
+          <select id="area">
+            <option value="audiovisual">Audiovisual</option>
+            <option value="design">Design e Marketing</option>
+            <option value="prog">Programação e Games</option>
+            <option value="eco">Economia Criativa</option>
+            <option value="niv">Nivelamento</option>
+          </select>
+          <div class="muted">Obs.: “Nivelamento” aqui é uma área (conteúdo de base).</div>
+        </div>
+
+        <div>
+          <label>Trilha (Lane)</label>
+          <input id="laneLabel" placeholder="Ex.: Fundamentos / Portfólio / Entrada" />
+          <div class="muted">Se não existir, será criada automaticamente nessa área.</div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <label>Título do curso</label>
+      <input id="title" placeholder="Ex.: Fundamentos de Criatividade e Projetos" />
+
+      <label>Resumo curto (nota)</label>
+      <textarea id="note" placeholder="Uma frase curta para aparecer na trilha."></textarea>
+
+      <label>Objetivos</label>
+      <textarea id="objectives" placeholder="Liste objetivos do curso. Dica: um objetivo por linha."></textarea>
+
+      <div class="row">
+        <div>
+          <label>Carga horária (texto)</label>
+          <input id="workload" placeholder="Ex.: 12h (4 aulas de 3h)" />
+        </div>
+        <div>
+          <label>Formato</label>
+          <input id="format" placeholder="Ex.: Presencial | Oficinas práticas | Projeto guiado" />
+        </div>
+      </div>
+
+      <label>Pré-requisitos</label>
+      <textarea id="prereq" placeholder="Ex.: Nenhum | Ter participado do Módulo 1"></textarea>
+
+      <label>Conteúdo programático</label>
+      <textarea id="syllabus" placeholder="Tópicos do curso. Dica: um tópico por linha."></textarea>
+
+      <label>Materiais</label>
+      <textarea id="materials" placeholder="Ex.: Notebook | Celular | Materiais de prototipagem..."></textarea>
+
+      <div class="row">
+        <div>
+          <label>Data de início</label>
+          <input id="startDate" type="date" />
+        </div>
+        <div>
+          <label>Data final</label>
+          <input id="endDate" type="date" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Horário início</label>
+          <input id="startTime" type="time" />
+        </div>
+        <div>
+          <label>Horário final</label>
+          <input id="endTime" type="time" />
+        </div>
+      </div>
+
+      <label>Dias da semana (aulas)</label>
+      <div class="inline" id="weekdayBox"></div>
+
+      <div class="hr"></div>
+
+      <div class="actions">
+        <button id="saveBtn">Salvar curso</button>
+        <button class="secondary" id="clearBtn" type="button">Limpar formulário</button>
+      </div>
+
+      <div class="muted" style="margin-top:10px">
+        Dica: você pode cadastrar vários cursos e depois clicar em “Gerar data.js” do lado direito.
+      </div>
+    </section>
+
+    <!-- LIST + EXPORT -->
+    <section class="card">
+      <h2>Cursos cadastrados</h2>
+      <div class="list" id="courseList"></div>
+
+      <div class="hr"></div>
+
+      <div class="actions">
+        <button class="secondary" id="exportBtn" type="button">Gerar data.js</button>
+        <button class="secondary" id="copyBtn" type="button">Copiar</button>
+        <button class="danger" id="resetBtn" type="button">Apagar tudo</button>
+      </div>
+
+      <label style="margin-top:12px">Saída (cole no seu <code>data.js</code>)</label>
+      <pre id="output">// Clique em "Gerar data.js"</pre>
+
+      <div class="muted" style="margin-top:10px">
+        *Mantém <code>steps: [{title, note}]</code> e adiciona <code>meta</code> com todos os campos completos.
+      </div>
+    </section>
+  </main>
+
+  <script src="./data-config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
